@@ -26,7 +26,7 @@
 	"scripts": {
 		"init": "prisma db push && prisma db seed",
 		"dev:tsc": "tsc --watch -p .",
-		"dev:serve": "nodemon -e js -w dist dist/main.js",
+		"dev:serve": "nodemon -e js -w dist dist/server",
 		"dev": "run-p dev:*",
 		"build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate"
 	}
