@@ -52,6 +52,7 @@ async function getProjectDetailsHandler(request: Hapi.Request, h: Hapi.ResponseT
 	const { prisma } = request.server.app
 	const { apiKey, projectId } = request.payload as any
 
+	console.log('Authorization:', request.headers.authorization)
 	console.log('apiKey', apiKey, 'projectId', projectId)
 
 	// return 400 if apiKey or projectId is missing
