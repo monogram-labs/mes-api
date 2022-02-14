@@ -33,18 +33,12 @@ export default projectsPlugin
 
 async function newProjectHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
 	const { prisma } = request.server.app
-	const { name, environment, gitUrl } = request.payload as any
-
-	// const projectData = projects?.map((post: Prisma.ProjectCreateInput) => {
-	// 	// return { title: post?.title, content: post?.content }
-	// 	return { title: post?.title, content: post?.content }
-	// })
+	const { name, gitUrl } = request.payload as any
 
 	try {
 		const createdProject = await prisma.project.create({
 			data: {
 				name,
-				environment,
 				gitUrl
 			}
 		})
@@ -67,6 +61,9 @@ async function getProjectDetailsHandler(request: Hapi.Request, h: Hapi.ResponseT
 		const project = await prisma.project.findUnique({
 			where: {
 				id: projectId
+			},
+			include: {
+				apiKeys: true
 			}
 		})
 

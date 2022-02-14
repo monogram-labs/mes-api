@@ -44,22 +44,35 @@ model Invite {
   account   Account? @relation(fields: [accountId], references: [id])
 }
 
+//  ----------------------------------------------------------------------------
+
 model Project {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  name        String
-  environment String
-  gitUrl      String
-  apiKeys     ApiKey[]
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String
+  gitUrl    String
+  apiKeys   ApiKey[]
+  variables Variable[]
 }
 
 model ApiKey {
-  id        String   @id @default(uuid())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   projectId String?
   project   Project? @relation(fields: [projectId], references: [id])
   key       String   @default(uuid())
   access    String
+}
+
+model Variable {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
+  // actual content of the environment variable;
+  // v0.1 = whole file here; may change to individual variable in the future
+  content   String
 }
