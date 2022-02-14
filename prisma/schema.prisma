@@ -9,6 +9,7 @@ generator client {
 datasource db {
   provider             = "mysql"
   url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
@@ -41,4 +42,24 @@ model Invite {
   accountId String?
   isValid   Boolean  @default(true)
   account   Account? @relation(fields: [accountId], references: [id])
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  environment String
+  gitUrl      String
+  apiKeys     ApiKey[]
+}
+
+model ApiKey {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
+  key       String   @default(uuid())
+  access    String
 }
