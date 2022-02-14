@@ -63,6 +63,7 @@ model ApiKey {
   projectId String?
   project   Project? @relation(fields: [projectId], references: [id])
   key       String   @default(uuid())
+  // Access type: read, write, full
   access    String
 }
 
