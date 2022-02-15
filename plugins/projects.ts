@@ -77,9 +77,9 @@ async function getProjectDetailsHandler(request: Hapi.Request, h: Hapi.ResponseT
 		})
 
 		// Get the variables for the project
-		const variables = await prisma.project.findMany({
+		const variables = await prisma.variable.findMany({
 			where: {
-				id: project[0].id
+				projectId: project[0].id
 			},
 			take: 1,
 			orderBy: {
@@ -91,7 +91,7 @@ async function getProjectDetailsHandler(request: Hapi.Request, h: Hapi.ResponseT
 			Array.isArray(project) && project.length > 0
 				? {
 						project: project[0],
-						variables: variables[0]
+						envContent: variables[0]
 				  }
 				: null
 
