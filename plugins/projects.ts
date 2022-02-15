@@ -63,20 +63,39 @@ async function getProjectDetailsHandler(request: Hapi.Request, h: Hapi.ResponseT
 		const project = await prisma.project.findMany({
 			where: {
 				AND: {
-					id: projectId,
-					apiKeys: {
-						some: {
-							key: apiKey
-						}
-					}
+					id: projectId
+					// apiKeys: {
+					// 	some: {
+					// 		key: apiKey
+					// 	}
+					// }
 				}
+			}
+			// include: {
+			// 	apiKeys: true
+			// }
+		})
+
+		// Get the variables for the project
+		const variables = await prisma.project.findMany({
+			where: {
+				id: project[0].id
 			},
-			include: {
-				apiKeys: true
+			take: 1,
+			orderBy: {
+				createdAt: 'desc'
 			}
 		})
 
-		return Array.isArray(project) && project.length > 0 ? h.response(project[0]).code(200) : null
+		const retval =
+			Array.isArray(project) && project.length > 0
+				? {
+						project: project[0],
+						variables: variables[0]
+				  }
+				: null
+
+		return retval ? h.response(retval).code(200) : null
 	} catch (err) {
 		console.log(err)
 	}
