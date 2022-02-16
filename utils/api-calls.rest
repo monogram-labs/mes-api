@@ -3,6 +3,12 @@ GET http://localhost:4000/users
 
 
 ###
+GET http://localhost:4000/projects
+content-type: application/json
+x-api-key: 11234565432?.qwertyuiop#.nbvcxz
+
+
+###
 POST http://localhost:4000/new-project HTTP/1.1
 content-type: application/json
 
@@ -20,4 +26,17 @@ content-type: application/json
 {
 	"projectId": "cec487ee-1749-470d-8e1d-6afeb506641f",
 	"apiKey": ""
+}
+
+
+###
+POST http://localhost:4000/env
+content-type: application/json
+x-api-key: 11234565432?.qwertyuiop#.nbvcxz
+
+{
+  "envFileContents": "NEXT_CMS_DATOCMS_API_TOKEN=f0sda0d02130as1223213
+NEXT_DATOCMS_ENVIRONMENT=dev-dev
+",
+  "projectId": "ca2e8777-b347-4142-89e8-63e59e677eee"
 }

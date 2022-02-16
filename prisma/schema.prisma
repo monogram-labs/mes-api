@@ -61,9 +61,9 @@ model Project {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   name      String
-  orgId     String?
-  org       Org?       @relation(fields: [orgId], references: [id])
-  gitUrl    String
+  orgId     String
+  org       Org        @relation(fields: [orgId], references: [id])
+  gitUrl    String?
   variables Variable[]
 }
 
@@ -71,8 +71,8 @@ model ApiKey {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  orgId     String?
-  org       Org?     @relation(fields: [orgId], references: [id])
+  orgId     String
+  org       Org      @relation(fields: [orgId], references: [id])
   key       String   @default(uuid())
   // Access type: read, write, full
   access    String
@@ -82,8 +82,8 @@ model Variable {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  projectId String?
-  project   Project? @relation(fields: [projectId], references: [id])
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
   // actual content of the environment variable;
   // v0.1 = whole file here; may change to individual variable in the future
   content   String   @db.Text
