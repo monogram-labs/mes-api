@@ -20,7 +20,7 @@ server.route({
 	method: 'GET',
 	path: '/',
 	handler: (request, h) => {
-		return '🌟 .menv APIs 🌟'
+		return '🌟 Monogram Env Sync (`mes`) APIs 🌟'
 	}
 })
 
