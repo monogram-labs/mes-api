@@ -28,6 +28,9 @@
 		"dev:tsc": "tsc --watch -p .",
 		"dev:serve": "nodemon -e js -w dist dist/server",
 		"dev": "run-p dev:*",
+		"gcp-build": "tsc -p .",
+		"deploy": "gcloud app deploy",
+		"start": "node ./dist/server",
 		"prisma:push": "prisma db push",
 		"build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate"
 	}
