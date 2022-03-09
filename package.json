@@ -32,6 +32,6 @@
 		"deploy": "gcloud app deploy",
 		"start": "node ./dist/server",
 		"prisma:push": "prisma db push",
-		"build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate"
+		"prisma:build": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate"
 	}
 }
